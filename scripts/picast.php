@@ -7,6 +7,21 @@ if (file_exists(dirname(dirname(__FILE__)) . '/config.inc.php')) {
 
 use PiCast\Config;
 
+$cachePath = Config::get('CACHE_DIR') . "cache.json";
+
+$data                       = array();
+$data['SERVER_SENDER_ADDR'] = Config::get('SERVER_SENDER_ADDR');
+$data['SERVER_SENDER_PATH'] = Config::get('SERVER_SENDER_PATH');
+$data['SECRET']             = Config::get('SECRET');
+
+$encodedData = json_encode($data);
+
+$cache = @file_get_contents($cachePath);
+
+if ($cache == $encodedData) {
+    return;
+}
+
 $data = 'SERVER_SENDER_ADDR=' . Config::get('SERVER_SENDER_ADDR')
       . '&SERVER_SENDER_PATH=' . Config::get('SERVER_SENDER_PATH')
       . '&SECRET=' . Config::get('SECRET');
@@ -22,4 +37,6 @@ curl_setopt($ch, CURLOPT_POSTREDIR, 3);
 
 $response = curl_exec($ch);
 
-print_r($response);
+if ($response == 'SUCCESS') {
+    file_put_contents($cachePath, $encodedData);
+}
