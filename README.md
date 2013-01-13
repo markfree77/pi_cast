@@ -1,4 +1,10 @@
 pi_cast
 =======
 
-pi cast
+Two part set up.
+
+SERVER_SENDER
+------
+
+SERVER_RECIEVER
+------
