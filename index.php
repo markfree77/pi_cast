@@ -17,7 +17,7 @@ if (isset($_POST['SERVER_SENDER_ADDR'], $_POST['SERVER_SENDER_PATH'], $_POST['SE
     //Do not store the secret.
     unset($_POST['SECRET']);
 
-    $_POST['MODIFY_DATE'] = date("F j, Y, g:i a");
+    $_POST['MODIFY_DATE'] = date("F j, Y, g:i:s a");
 
     file_put_contents($cachePath, json_encode($_POST));
 
