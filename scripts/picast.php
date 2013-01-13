@@ -18,9 +18,8 @@ curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 curl_setopt($ch, CURLOPT_HEADER, 0);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($ch, CURLOPT_POSTREDIR, 3);
 
 $response = curl_exec($ch);
-
-echo "success" . PHP_EOL;
 
 print_r($response);
